@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import ContactList from "../../../sections/contact/list/view/contact-list";
+import CreateList from "../../../sections/contact/create/create-list";
 
 const metadata = { title: `Contact Create` };
 
@@ -11,7 +11,7 @@ const Page: FC = () => {
     <>
       <title>{metadata.title}</title>
 
-      <ContactList />
+      <CreateList />
     </>
   );
 };
