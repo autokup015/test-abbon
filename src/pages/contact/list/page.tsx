@@ -1,7 +1,6 @@
 import type { FC } from "react";
-import HomeView from "../../sections/home/view/home-view";
 
-const metadata = { title: `Homepage` };
+const metadata = { title: `Contact List` };
 
 // ---------------------------------------------------------------------------------
 
@@ -9,8 +8,8 @@ const Page: FC = () => {
   return (
     <>
       <title>{metadata.title}</title>
-
-      <HomeView />
+      
+      Page
     </>
   );
 };

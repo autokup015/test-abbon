@@ -1,8 +1,10 @@
+import NotFound from "../pages/404/not-found";
 
+const NotFoundPage = [
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+];
 
-// const NotFoundPage: router = [
-//   {
-//     path: "*",
-//     element: <>Not found</>,
-//   },
-// ];
+export { NotFoundPage };

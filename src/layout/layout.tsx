@@ -1,4 +1,4 @@
-import { Box, ListItemIcon, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -8,44 +8,23 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-
-import MailIcon from "@mui/icons-material/Mail";
 
 import type { FC } from "react";
 
 import { useState } from "react";
 import ChangeLanguages from "../components/header/change-languages";
 import UserImgProfile from "../components/header/user-img-profile";
+import Footer from "../components/footer/footer";
+import ListSidebar from "../components/sidebar/list-sidebar";
 
 const drawerWidth = 240;
 
-const navItems = [
-  {
-    name: "Home",
-    to: "/",
-  },
-  {
-    name: "Contact",
-    to: "/contact",
-  },
-];
-
-type Props = {
-  window?: () => Window;
-};
-
 // ---------------------------------------------------------------------------------
 
-const Layout: FC<Props> = ({ window }) => {
+const Layout: FC = () => {
   const navigate = useNavigate();
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -67,20 +46,11 @@ const Layout: FC<Props> = ({ window }) => {
     }
   };
 
-  const handleGoPage = (path: string) => {
-    navigate(path);
-  };
-
   const goHomePage = () => navigate("/");
 
   const drawer = (
     <Box>
-      <Box
-        height={64}
-        // sx={{
-        //   bgcolor: "#1976d2",
-        // }}
-      >
+      <Box height={64}>
         <Typography component="div" variant="h6" onClick={goHomePage}>
           logo
         </Typography>
@@ -88,26 +58,9 @@ const Layout: FC<Props> = ({ window }) => {
 
       <Divider />
 
-      <List>
-        {navItems.map((item, index) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.name}
-                onClick={() => handleGoPage(item.to)}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <ListSidebar />
     </Box>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -161,7 +114,7 @@ const Layout: FC<Props> = ({ window }) => {
         aria-label="mailbox folders"
       >
         <Drawer
-          container={container}
+          container={undefined}
           variant="temporary"
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
@@ -179,6 +132,7 @@ const Layout: FC<Props> = ({ window }) => {
         >
           {drawer}
         </Drawer>
+
         <Drawer
           variant="permanent"
           sx={{
@@ -214,69 +168,3 @@ const Layout: FC<Props> = ({ window }) => {
 };
 
 export default Layout;
-
-// ---------------------------------------------------------------------------------
-
-const Footer = () => {
-  const sizeIcon = 25;
-
-  const onCallPhone = () => {
-    window.location.href = "tel:+1234567890";
-  };
-
-  const onSendEmail = () => {
-    window.location.href = "mailto:atbochonlatee@gmail.com";
-  };
-
-  const onShowLine = () => {
-    window.location.href = "https://line.me/ti/p/~autochonlatee";
-  };
-
-  return (
-    <Box
-      height={100}
-      width="100%"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        borderTop: "1px solid #eee",
-      }}
-    >
-      <Stack direction="row" spacing={2}>
-        <Box
-          component="img"
-          src="/img/phone.svg"
-          width={sizeIcon}
-          height={sizeIcon}
-          sx={{
-            cursor: "pointer",
-          }}
-          onClick={onCallPhone}
-        />
-
-        <Box
-          component="img"
-          src="/img/mail.svg"
-          width={sizeIcon}
-          height={sizeIcon}
-          sx={{
-            cursor: "pointer",
-          }}
-          onClick={onSendEmail}
-        />
-
-        <Box
-          component="img"
-          src="/img/line.svg"
-          width={sizeIcon}
-          height={sizeIcon}
-          sx={{
-            cursor: "pointer",
-          }}
-          onClick={onShowLine}
-        />
-      </Stack>
-    </Box>
-  );
-};

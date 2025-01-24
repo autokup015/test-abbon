@@ -17,12 +17,12 @@ import { useTranslation } from "react-i18next";
 const lang = [
   {
     name: "Thailand",
-    img: "/th.svg",
+    img: "/img/th.svg",
     lang: "th",
   },
   {
     name: "English",
-    img: "/en.svg",
+    img: "/img/en.svg",
     lang: "en",
   },
 ];
@@ -58,12 +58,14 @@ const ChangeLanguages: FC = () => {
 
   const id = open ? "simple-popover" : undefined;
 
+  const getImgFlag = `/img/${language}.svg`;
+
   return (
     <>
       <Button variant="text" onClick={handleClick}>
         <Box
           component="img"
-          src={`/${language}.svg`}
+          src={getImgFlag}
           width={33}
           height={33}
           sx={{

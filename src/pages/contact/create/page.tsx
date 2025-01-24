@@ -1,18 +1,19 @@
 import type { FC } from "react";
-import ContactView from "../../sections/contact/view/contact-view";
 
-const metadata = { title: `Contact List` };
+import ContactList from "../../../sections/contact/list/view/contact-list";
+
+const metadata = { title: `Contact Create` };
 
 // ---------------------------------------------------------------------------------
 
-const Contact: FC = () => {
+const Page: FC = () => {
   return (
     <>
       <title>{metadata.title}</title>
-      
-      <ContactView />
+
+      <ContactList />
     </>
   );
 };
 
-export default Contact;
+export default Page;
