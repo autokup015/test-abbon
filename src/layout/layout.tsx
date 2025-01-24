@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  ListItemIcon,
-  Popover,
-  Stack,
-} from "@mui/material";
+import { Box, ListItemIcon, Stack } from "@mui/material";
 
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -30,22 +23,10 @@ import MailIcon from "@mui/icons-material/Mail";
 import type { FC } from "react";
 
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import ChangeLanguages from "../components/header/change-languages";
+import UserImgProfile from "../components/header/user-img-profile";
 
 const drawerWidth = 240;
-
-const lang = [
-  {
-    name: "Thailand",
-    img: "/th.svg",
-    lang: "th",
-  },
-  {
-    name: "English",
-    img: "/en.svg",
-    lang: "en",
-  },
-];
 
 const navItems = [
   {
@@ -67,27 +48,9 @@ type Props = {
 const Layout: FC<Props> = ({ window }) => {
   const navigate = useNavigate();
 
-  const { i18n } = useTranslation();
-
-  const { language } = i18n;
-
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const [isClosing, setIsClosing] = useState(false);
-
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const open = Boolean(anchorEl);
-
-  const id = open ? "simple-popover" : undefined;
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -102,12 +65,6 @@ const Layout: FC<Props> = ({ window }) => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
     }
-  };
-
-  const onChangeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang);
-
-    setAnchorEl(null);
   };
 
   const handleGoPage = (path: string) => {
@@ -183,64 +140,16 @@ const Layout: FC<Props> = ({ window }) => {
               Chonlatee Sriwichai
             </Typography>
 
-            <Stack direction="row" alignItems='center'>
-              <Button variant="text" onClick={handleClick}>
-                <Box
-                  component="img"
-                  src={`/${language}.svg`}
-                  width={33}
-                  height={33}
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                />
-              </Button>
-
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <List>
-                  {lang.map((item) => (
-                    <ListItem key={item.name} disablePadding>
-                      <ListItemButton
-                        onClick={() => onChangeLanguage(item.lang)}
-                      >
-                        <ListItemIcon>
-                          <Box
-                            component="img"
-                            src={item.img}
-                            width={25}
-                            height={25}
-                          />
-                        </ListItemIcon>
-                        <ListItemText primary={item.name} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              </Popover>
+            <Stack direction="row" alignItems="center">
+              <ChangeLanguages />
 
               <Divider
                 orientation="vertical"
                 flexItem
                 sx={{ mx: 2, bgcolor: "white" }}
               />
-              <Avatar
-                alt="Remy Sharp"
-                src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: 33, height: 33, cursor: "pointer" }}
-              />
+
+              <UserImgProfile />
             </Stack>
           </Stack>
         </Toolbar>
@@ -309,6 +218,20 @@ export default Layout;
 // ---------------------------------------------------------------------------------
 
 const Footer = () => {
+  const sizeIcon = 25;
+
+  const onCallPhone = () => {
+    window.location.href = "tel:+1234567890";
+  };
+
+  const onSendEmail = () => {
+    window.location.href = "mailto:atbochonlatee@gmail.com";
+  };
+
+  const onShowLine = () => {
+    window.location.href = "https://line.me/ti/p/~autochonlatee";
+  };
+
   return (
     <Box
       height={100}
@@ -320,7 +243,40 @@ const Footer = () => {
         borderTop: "1px solid #eee",
       }}
     >
-      <Box>Hello</Box>
+      <Stack direction="row" spacing={2}>
+        <Box
+          component="img"
+          src="/img/phone.svg"
+          width={sizeIcon}
+          height={sizeIcon}
+          sx={{
+            cursor: "pointer",
+          }}
+          onClick={onCallPhone}
+        />
+
+        <Box
+          component="img"
+          src="/img/mail.svg"
+          width={sizeIcon}
+          height={sizeIcon}
+          sx={{
+            cursor: "pointer",
+          }}
+          onClick={onSendEmail}
+        />
+
+        <Box
+          component="img"
+          src="/img/line.svg"
+          width={sizeIcon}
+          height={sizeIcon}
+          sx={{
+            cursor: "pointer",
+          }}
+          onClick={onShowLine}
+        />
+      </Stack>
     </Box>
   );
 };
