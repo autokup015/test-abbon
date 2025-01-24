@@ -1,4 +1,11 @@
-import { Box, ListItemIcon } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  ListItemIcon,
+  Popover,
+  Stack,
+} from "@mui/material";
 
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -23,8 +30,22 @@ import MailIcon from "@mui/icons-material/Mail";
 import type { FC } from "react";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
+
+const lang = [
+  {
+    name: "Thailand",
+    img: "/th.svg",
+    lang: "th",
+  },
+  {
+    name: "English",
+    img: "/en.svg",
+    lang: "en",
+  },
+];
 
 const navItems = [
   {
@@ -46,8 +67,27 @@ type Props = {
 const Layout: FC<Props> = ({ window }) => {
   const navigate = useNavigate();
 
+  const { i18n } = useTranslation();
+
+  const { language } = i18n;
+
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const [isClosing, setIsClosing] = useState(false);
+
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const open = Boolean(anchorEl);
+
+  const id = open ? "simple-popover" : undefined;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -62,6 +102,12 @@ const Layout: FC<Props> = ({ window }) => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
     }
+  };
+
+  const onChangeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+
+    setAnchorEl(null);
   };
 
   const handleGoPage = (path: string) => {
@@ -126,9 +172,77 @@ const Layout: FC<Props> = ({ window }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+
+          <Stack
+            direction="row"
+            width="100%"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="body1" noWrap>
+              Chonlatee Sriwichai
+            </Typography>
+
+            <Stack direction="row" alignItems='center'>
+              <Button variant="text" onClick={handleClick}>
+                <Box
+                  component="img"
+                  src={`/${language}.svg`}
+                  width={33}
+                  height={33}
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                />
+              </Button>
+
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <List>
+                  {lang.map((item) => (
+                    <ListItem key={item.name} disablePadding>
+                      <ListItemButton
+                        onClick={() => onChangeLanguage(item.lang)}
+                      >
+                        <ListItemIcon>
+                          <Box
+                            component="img"
+                            src={item.img}
+                            width={25}
+                            height={25}
+                          />
+                        </ListItemIcon>
+                        <ListItemText primary={item.name} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Popover>
+
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{ mx: 2, bgcolor: "white" }}
+              />
+              <Avatar
+                alt="Remy Sharp"
+                src="https://mui.com/static/images/avatar/1.jpg"
+                sx={{ width: 33, height: 33, cursor: "pointer" }}
+              />
+            </Stack>
+          </Stack>
         </Toolbar>
       </AppBar>
 
