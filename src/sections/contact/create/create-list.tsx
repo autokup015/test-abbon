@@ -79,11 +79,11 @@ const CreateList: FC = () => {
 
   return (
     <>
-      <Box>
+      <Stack spacing={2}>
+        <Typography variant="h6">Create List</Typography>
+
         <Card sx={{ p: 2 }}>
           <Stack direction="column" spacing={2}>
-            <Typography variant="h6">Create List</Typography>
-
             <form onSubmit={handleSubmit(onSubmit, onError)}>
               <Grid container spacing={2}>
                 <Grid item md={6} sm={12} xs={12}>
@@ -120,7 +120,7 @@ const CreateList: FC = () => {
             </form>
           </Stack>
         </Card>
-      </Box>
+      </Stack>
 
       {/* DIALOG */}
 
@@ -128,7 +128,7 @@ const CreateList: FC = () => {
         open={isOpen}
         onClose={() => {
           setIsOpen(false);
-          
+
           navigate("/contact/list");
         }}
         title="Success"

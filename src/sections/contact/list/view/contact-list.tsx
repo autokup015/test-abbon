@@ -1,9 +1,11 @@
-import { useMemo, useState, type FC } from "react";
+import { KeyboardEvent, useMemo, useState, type FC } from "react";
 
 import {
   Box,
+  Button,
   IconButton,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -11,11 +13,13 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useContactList } from "../../../../hook/use-contact-list";
 import DeleteContactDialog from "../delete-contact-dialog";
 import { TCreateList } from "../../create/schema/create-schema";
+import { useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = [
   { id: "fullName", label: "First name - Last name" },
@@ -36,6 +40,36 @@ const ContactList: FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [search, setSearch] = useState("");
+
+  const [confirmSearch, setConfirmSearch] = useState("");
+
+  // --------------------------- Value ---------------------------
+
+  const disabledBtnSearch = search.length <= 2;
+
+  const filterSearchDataContact = useMemo(
+    () =>
+      [...dataContactList].filter((item) =>
+        item.name.toLowerCase().match(confirmSearch.toLowerCase())
+      ),
+    [confirmSearch, dataContactList]
+  );
+
+  const emptyRows =
+    page > 0
+      ? Math.max(0, (1 + page) * rowsPerPage - filterSearchDataContact.length)
+      : 0;
+
+  const handleDataTable = useMemo(
+    () =>
+      filterSearchDataContact.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [filterSearchDataContact, page, rowsPerPage]
+  );
+
   // --------------------------- Function ---------------------------
 
   const handleDeleteItem = (data: TCreateList) => {
@@ -55,29 +89,62 @@ const ContactList: FC = () => {
     setPage(0);
   };
 
-  // --------------------------- Value ---------------------------
+  const handleSearch = () => {
+    if (disabledBtnSearch) {
+      return;
+    }
 
-  const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - dataContactList.length)
-      : 0;
+    setConfirmSearch(search);
+  };
 
-  const handleDataTable = useMemo(
-    () =>
-      [...dataContactList].slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [dataContactList, page, rowsPerPage]
-  );
+  const handleEnterSearch = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!search && e.keyCode === 13) {
+      clearSearch();
+      return;
+    }
+
+    if (e.keyCode === 13) {
+      handleSearch();
+    }
+  };
+
+  const clearSearch = () => {
+    setSearch("");
+    setConfirmSearch("");
+  };
 
   return (
-    <>
+    <Stack spacing={2}>
+      <Typography variant="h6">Contact List</Typography>
+
+      <Stack direction="row" justifyContent="space-between" spacing={2}>
+        <TextField
+          label="Search"
+          size="small"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyUp={handleEnterSearch}
+          fullWidth
+        />
+
+        <Stack direction="row" spacing={2}>
+          <Button variant="outlined" color="primary" onClick={clearSearch}>
+            Clear
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="primary"
+            disabled={disabledBtnSearch}
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </Stack>
+      </Stack>
+
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
-          <Typography variant="h6" p={2}>
-            Contact List
-          </Typography>
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 750 }}
@@ -115,16 +182,19 @@ const ContactList: FC = () => {
                 ))}
 
                 <TableGapEmptry emptyRows={emptyRows} />
-              </TableBody>
 
-              <TableEmptry nodata={!handleDataTable} />
+                <TableEmptry
+                  nodata={!filterSearchDataContact.length}
+                  initialValue={!dataContactList.length}
+                />
+              </TableBody>
             </Table>
           </TableContainer>
 
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[5, 10, 100]}
             component="div"
-            count={dataContactList.length}
+            count={filterSearchDataContact.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -140,7 +210,7 @@ const ContactList: FC = () => {
         onClose={() => setIsOpen(false)}
         initialValue={selected}
       />
-    </>
+    </Stack>
   );
 };
 
@@ -168,9 +238,12 @@ const TableGapEmptry: FC<TEmptyGapRows> = ({ emptyRows }) => {
 
 type TEmptyRows = {
   nodata: boolean;
+  initialValue: boolean;
 };
 
-const TableEmptry: FC<TEmptyRows> = ({ nodata }) => {
+const TableEmptry: FC<TEmptyRows> = ({ nodata, initialValue }) => {
+  const nagigate = useNavigate();
+
   if (nodata) {
     return (
       <TableRow>
@@ -182,9 +255,22 @@ const TableEmptry: FC<TEmptyRows> = ({ nodata }) => {
             border: "none",
           }}
         >
-          <Typography variant="body1" sx={{ color: "gray" }}>
-            No data
-          </Typography>
+          <Stack alignItems="center" spacing={2}>
+            <Typography variant="h4" color="textDisabled">
+              No data
+            </Typography>
+
+            {initialValue && (
+              <Button
+                variant="text"
+                color="primary"
+                sx={{ width: "max-content", m: "auto" }}
+                onClick={() => nagigate("/contact/create")}
+              >
+                Create Contact
+              </Button>
+            )}
+          </Stack>
         </TableCell>
       </TableRow>
     );
