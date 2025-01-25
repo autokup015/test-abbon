@@ -1,6 +1,12 @@
 import type { FC } from "react";
 
-import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
+import {
+  CircularProgress,
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 
 import { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -54,6 +60,8 @@ const ListSidebar: FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // --------------------------- Function ---------------------------
 
   const handleGoPage = (path: string) => {
@@ -61,6 +69,8 @@ const ListSidebar: FC = () => {
   };
 
   const currentLocation = () => {
+    setIsLoading(true);
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, ErrorPermission);
     }
@@ -76,6 +86,8 @@ const ListSidebar: FC = () => {
     const { latitude, longitude } = coords;
 
     window.open(`https://www.google.com/maps?q=${latitude},${longitude}`);
+
+    setIsLoading(false);
   }
 
   return (
@@ -88,6 +100,7 @@ const ListSidebar: FC = () => {
                 key={`main-collapse-${item.name}`}
                 name={item.name}
                 data={item.subMenu}
+                isLoading={isLoading}
                 handleGoPage={handleGoPage}
                 handleCurrentLocation={currentLocation}
               />
@@ -109,7 +122,10 @@ const ListSidebar: FC = () => {
 
       <TextDialog
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+          setIsLoading(false);
+        }}
         title="Error"
         description="Your permission denied"
       />
@@ -131,11 +147,14 @@ type THandleCollapse = {
 
   handleGoPage: (page: string) => void;
   handleCurrentLocation: () => void;
+
+  isLoading?: boolean;
 };
 
 const HandleCollapse: FC<THandleCollapse> = ({
   data,
   name,
+  isLoading = false,
   handleGoPage,
   handleCurrentLocation,
 }) => {
@@ -150,25 +169,35 @@ const HandleCollapse: FC<THandleCollapse> = ({
 
       {/* COLLAPSE */}
 
-      {data.map((item, index) => (
-        <Collapse
-          key={`sub-collapse-${item.name}-${index}`}
-          in={open}
-          timeout="auto"
-          unmountOnExit
-        >
-          <List component="div" disablePadding>
-            <ListItemButton
-              sx={{ pl: 4 }}
-              onClick={() =>
-                item.function ? handleCurrentLocation() : handleGoPage(item.to)
-              }
-            >
-              <ListItemText primary={item.name} />
-            </ListItemButton>
-          </List>
-        </Collapse>
-      ))}
+      {data.map((item, index) => {
+        const openIsLoading = isLoading && item.function;
+
+        return (
+          <Collapse
+            key={`sub-collapse-${item.name}-${index}`}
+            in={open}
+            timeout="auto"
+            unmountOnExit
+          >
+            <List component="div" disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                onClick={() =>
+                  item.function
+                    ? handleCurrentLocation()
+                    : handleGoPage(item.to)
+                }
+              >
+                <ListItemText primary={item.name} />
+
+                {openIsLoading && (
+                  <CircularProgress size={15} color="primary" />
+                )}
+              </ListItemButton>
+            </List>
+          </Collapse>
+        );
+      })}
     </>
   );
 };
