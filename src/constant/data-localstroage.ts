@@ -1,3 +1,5 @@
 const DATA_CONTACT_LIST = "contactList";
 
-export { DATA_CONTACT_LIST };
+const DATA_IMG_USER = "img";
+
+export { DATA_CONTACT_LIST, DATA_IMG_USER };

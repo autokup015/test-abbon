@@ -1,48 +1,28 @@
 import { useState, type FC } from "react";
 
-import {
-  Avatar,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@mui/material";
+import { Avatar } from "@mui/material";
+
+import ChangeImgProfile from "../dialog/change-img-profile";
+import { useUserProfileContext } from "../../provider/user-profile-img";
+
+// ---------------------------------------------------------------------------------
 
 const UserImgProfile: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { getUserProfileImg } = useUserProfileContext();
 
-  const handleOnClose = () => {
-    setIsOpen(false);
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Avatar
-        alt="Remy Sharp"
-        src="https://mui.com/static/images/avatar/1.jpg"
+        src={getUserProfileImg}
         sx={{ width: 33, height: 33, cursor: "pointer" }}
         onClick={() => setIsOpen(true)}
       />
 
       {/* DIALOG */}
 
-      <Dialog open={isOpen} onClose={handleOnClose} fullWidth maxWidth="sm">
-        <DialogTitle>เปลี่ยนรูปภาพ</DialogTitle>
-
-        <DialogContent>hello</DialogContent>
-
-        <DialogActions>
-          <Button variant="contained" onClick={handleOnClose}>
-            <Typography variant="body2">ยกเลิก</Typography>
-          </Button>
-
-          <Button variant="contained">
-            <Typography variant="body2">ยืนยัน</Typography>
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <ChangeImgProfile open={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 };

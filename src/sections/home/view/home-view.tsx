@@ -1,22 +1,40 @@
-import { Button, Typography } from "@mui/material";
 import type { FC } from "react";
+
+import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
+import ChangeImgProfile from "../../../components/dialog/change-img-profile";
+
+import { useState } from "react";
+import { useUserProfileContext } from "../../../provider/user-profile-img";
+
+// ---------------------------------------------------------------------------------
 
 const HomeView: FC = () => {
-  const navigate = useNavigate();
-
   const { t } = useTranslation();
 
-  const goContactPage = () => {
-    navigate("/contact");
-  };
+  const { getUserProfileImg } = useUserProfileContext();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
-      <Typography variant="h5">{t("welcome")}</Typography>
-      <Button onClick={goContactPage}>Contact page</Button>
-    </div>
+    <>
+      <Stack spacing={2}>
+        <Typography variant="h5">{t("welcome")} Chonlatee Sriwichai</Typography>
+
+        <Box
+          component="img"
+          src={getUserProfileImg}
+          width={200}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setIsOpen(true)}
+        />
+      </Stack>
+
+      {/* DIALOG */}
+
+      <ChangeImgProfile open={isOpen} onClose={() => setIsOpen(false)} />
+    </>
   );
 };
 
