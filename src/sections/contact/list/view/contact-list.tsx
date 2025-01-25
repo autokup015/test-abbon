@@ -20,10 +20,12 @@ import { useContactList } from "../../../../hook/use-contact-list";
 import DeleteContactDialog from "../delete-contact-dialog";
 import { TCreateList } from "../../create/schema/create-schema";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
-const TABLE_HEAD = [
-  { id: "fullName", label: "First name - Last name" },
-  { id: "age", label: "Age" },
+const TABLE_HEAD = (t: TFunction) => [
+  { id: "fullName", label: t("contact.list.table_title_fullname") },
+  { id: "age", label: t("contact.list.table_title_age") },
   { id: "", label: "", width: 10 },
 ];
 
@@ -31,6 +33,8 @@ const TABLE_HEAD = [
 
 const ContactList: FC = () => {
   const { dataContactList } = useContactList();
+
+  const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
 
@@ -115,11 +119,11 @@ const ContactList: FC = () => {
 
   return (
     <Stack spacing={2}>
-      <Typography variant="h6">Contact List</Typography>
+      <Typography variant="h6">{t("contact.list.title")}</Typography>
 
       <Stack direction="row" justifyContent="space-between" spacing={2}>
         <TextField
-          label="Search"
+          label={t("contact.list.input_search")}
           size="small"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -129,7 +133,7 @@ const ContactList: FC = () => {
 
         <Stack direction="row" spacing={2}>
           <Button variant="outlined" color="primary" onClick={clearSearch}>
-            Clear
+            {t("button.clear")}
           </Button>
 
           <Button
@@ -138,7 +142,7 @@ const ContactList: FC = () => {
             disabled={disabledBtnSearch}
             onClick={handleSearch}
           >
-            Search
+            {t("button.search")}
           </Button>
         </Stack>
       </Stack>
@@ -153,7 +157,7 @@ const ContactList: FC = () => {
             >
               <TableHead>
                 <TableRow>
-                  {TABLE_HEAD.map((item) => (
+                  {TABLE_HEAD(t).map((item) => (
                     <TableCell key={item.id} width={item.width}>
                       {item.label}
                     </TableCell>
@@ -244,6 +248,8 @@ type TEmptyRows = {
 const TableEmptry: FC<TEmptyRows> = ({ nodata, initialValue }) => {
   const nagigate = useNavigate();
 
+  const { t } = useTranslation();
+
   if (nodata) {
     return (
       <TableRow>
@@ -257,7 +263,7 @@ const TableEmptry: FC<TEmptyRows> = ({ nodata, initialValue }) => {
         >
           <Stack alignItems="center" spacing={2}>
             <Typography variant="h4" color="textDisabled">
-              No data
+              {t("contact.list.table_emptry_title")}
             </Typography>
 
             {initialValue && (
@@ -267,7 +273,7 @@ const TableEmptry: FC<TEmptyRows> = ({ nodata, initialValue }) => {
                 sx={{ width: "max-content", m: "auto" }}
                 onClick={() => nagigate("/contact/create")}
               >
-                Create Contact
+                {t("contact.list.table_emptry_button")}
               </Button>
             )}
           </Stack>

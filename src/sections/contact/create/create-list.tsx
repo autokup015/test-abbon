@@ -18,12 +18,15 @@ import { useContactList } from "../../../hook/use-contact-list";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import TextDialog from "../../../components/dialog/text-dialog";
+import { useTranslation } from "react-i18next";
 
 const REGEX_NUMBER = /$^|^[0-9]+$/;
 
 // ---------------------------------------------------------------------------------
 
 const CreateList: FC = () => {
+  const { t } = useTranslation();
+
   const { onSaveData } = useContactList();
 
   const navigate = useNavigate();
@@ -59,6 +62,7 @@ const CreateList: FC = () => {
     setIsOpen(true);
   };
 
+  // ! may be not use this because validate is can prove it
   const onError = () => console.log("errors", errors);
 
   const onChangeAge = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +84,7 @@ const CreateList: FC = () => {
   return (
     <>
       <Stack spacing={2}>
-        <Typography variant="h6">Create List</Typography>
+        <Typography variant="h6">{t("contact.create.title")}</Typography>
 
         <Card sx={{ p: 2 }}>
           <Stack direction="column" spacing={2}>
@@ -90,7 +94,7 @@ const CreateList: FC = () => {
                   <TextField
                     {...register("name")}
                     fullWidth
-                    label="Firstname - Surname"
+                    label={t("contact.create.input_label_fullname")}
                     variant="outlined"
                     error={!!errors.name}
                     helperText={errors ? errors?.name?.message : ""}
@@ -101,7 +105,7 @@ const CreateList: FC = () => {
                   <TextField
                     onChange={onChangeAge}
                     fullWidth
-                    label="Age"
+                    label={t("contact.create.input_label_age")}
                     variant="outlined"
                     value={getValueAge === 0 ? "" : getValueAge}
                     error={!!errors.age}
@@ -112,7 +116,7 @@ const CreateList: FC = () => {
                 <Grid item xs={12}>
                   <Box textAlign="end">
                     <Button variant="contained" color="primary" type="submit">
-                      สร้าง
+                      {t("button.create")}
                     </Button>
                   </Box>
                 </Grid>
@@ -131,8 +135,8 @@ const CreateList: FC = () => {
 
           navigate("/contact/list");
         }}
-        title="Success"
-        description="Create contact success"
+        title={t("contact.create.dialog_create_title")}
+        description={t("contact.create.dialog_create_description")}
       />
     </>
   );

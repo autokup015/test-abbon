@@ -1,3 +1,64 @@
 {
-  "welcome": "ยินดีต้อนรับ"
+  "menu": {
+    "home": "หน้าแรก",
+    "contact": "ติดต่อ",
+
+    "sub_contact_list": "รายการ",
+    "sub_contact_create": "สร้าง",
+    "sub_contact_location": "ตำแหน่งปัจจุบัน",
+
+    "dialog_location": {
+      "title": "ข้อผิดพลาด",
+      "description": "สิทธิ์ของคุณถูกปฏิเสธ"
+    }
+  },
+
+  "navbar": {
+    "dialog_change_img": {
+      "title": "เปลี่ยนรุปภาพโปรไฟล์"
+    }
+  },
+
+  "homepage": {
+    "welcome": "ยินดีต้อนรับ"
+  },
+
+  "contact": {
+    "list": {
+      "title": "รายการติดต่อ",
+
+      "input_search": "ค้นหา",
+
+      "table_emptry_title": "ไม่มีข้อมูล",
+      "table_emptry_button": "สร้างรายการติดต่อ",
+
+      "table_title_fullname": "ชื่อ - นามสกุล",
+      "table_title_age": "อายุ",
+
+      "dialog_text_title": "ลบรายการติดต่อ",
+      "dialog_text_description": "คุณต้องการลบ"
+    },
+
+    "create": {
+      "title": "สร้างรายการ",
+
+      "input_label_fullname": "ชื่อ - นามสกุล",
+      "input_label_age": "อายุ",
+
+      "input_validate_fullname": "กรุณากรอกชื่อและนามสกุลของคุณ",
+      "input_validate_age": "กรุณากรอกอายุของคุณ",
+
+      "dialog_create_title": "สำเร็จ",
+      "dialog_create_description": "สร้างรายการติดต่อสำเร็จ"
+    }
+  },
+
+  "button": {
+    "create": "สร้าง",
+    "close": "ปิด",
+    "confirm": "ยืนยัน",
+    "search": "ค้นหา",
+    "clear": "ล้าง",
+    "cancle": "ยกเลิก"
+  }
 }

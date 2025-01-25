@@ -28,10 +28,7 @@ declare module "i18next" {
 
 // ----------------------------------------------------------------------
 
-// const resources = {
-//   en: En,
-//   th: Th,
-// };
+const lng = localStorage.getItem("i18nextLng") ?? "th";
 
 const resources = {
   en: {
@@ -44,7 +41,7 @@ const resources = {
 
 i18next.use(LanguageDetector).use(initReactI18next).init({
   resources,
-  lng: "th",
+  lng,
 });
 
 // ----------------------------------------------------------------------

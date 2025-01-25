@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 const lang = [
   {
-    name: "Thailand",
+    name: "ภาษาไทย",
     img: "/img/th.svg",
     lang: "th",
   },
@@ -39,9 +39,15 @@ const ChangeLanguages: FC = () => {
   // --------------------------- Function ---------------------------
 
   const onChangeLanguage = (lang: string) => {
+    if (language === lang) {
+      setAnchorEl(null);
+      return;
+    }
+
     i18n.changeLanguage(lang);
 
     setAnchorEl(null);
+    location.reload();
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

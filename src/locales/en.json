@@ -1,3 +1,64 @@
 {
-  "welcome": "Welcome"
+  "menu": {
+    "home": "Home",
+    "contact": "Contact",
+
+    "sub_contact_list": "List",
+    "sub_contact_create": "Create",
+    "sub_contact_location": "Current ocation",
+
+    "dialog_location": {
+      "title": "Error",
+      "description": "Your permission denied"
+    }
+  },
+
+  "navbar": {
+    "dialog_change_img": {
+      "title": "Change image profile"
+    }
+  },
+
+  "homepage": {
+    "welcome": "Welcome"
+  },
+
+  "contact": {
+    "list": {
+      "title": "Contact list",
+
+      "input_search": "Search",
+
+      "table_title_fullname": "Firstname - Lastname",
+      "table_title_age": "Age",
+
+      "table_emptry_title": "No data",
+      "table_emptry_button": "Create Contact",
+
+      "dialog_text_title": "Delete Contact List",
+      "dialog_text_description": "Do you want to delete"
+    },
+
+    "create": {
+      "title": "Create list",
+
+      "input_label_fullname": "Firstname - Lastname",
+      "input_label_age": "Age",
+
+      "input_validate_fullname": "Please enter your first and last name.",
+      "input_validate_age": "Please enter your age.",
+
+      "dialog_create_title": "Success",
+      "dialog_create_description": "Create contact successfully"
+    }
+  },
+
+  "button": {
+    "create": "Crate",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "clear": "Clear",
+    "cancle": "Cancle"
+  }
 }

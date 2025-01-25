@@ -12,25 +12,27 @@ import { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import TextDialog from "../dialog/text-dialog";
+import { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
-const navItems = [
+const navItems = (t: TFunction) => [
   {
-    name: "Home",
+    name: t("menu.home"),
     to: "/",
   },
   {
-    name: "Contact",
+    name: t("menu.contact"),
     subMenu: [
       {
-        name: "List",
+        name: t("menu.sub_contact_list"),
         to: "/contact/list",
       },
       {
-        name: "Create",
+        name: t("menu.sub_contact_create"),
         to: "/contact/create",
       },
       {
-        name: "Current location",
+        name: t("menu.sub_contact_location"),
         to: "",
         function: true,
       },
@@ -57,6 +59,8 @@ type Coords = {
 
 const ListSidebar: FC = () => {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -93,7 +97,7 @@ const ListSidebar: FC = () => {
   return (
     <>
       <List component="nav">
-        {navItems.map((item) => {
+        {navItems(t).map((item) => {
           if (item.subMenu) {
             return (
               <HandleCollapse
@@ -126,8 +130,8 @@ const ListSidebar: FC = () => {
           setIsOpen(false);
           setIsLoading(false);
         }}
-        title="Error"
-        description="Your permission denied"
+        title={t("menu.dialog_location.title")}
+        description={t("menu.dialog_location.description")}
       />
     </>
   );

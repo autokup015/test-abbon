@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useContactList } from "../../../hook/use-contact-list";
+import { useTranslation } from "react-i18next";
 
 type TDeleteContactDialogProps = {
   open: boolean;
@@ -23,6 +24,8 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
   initialValue,
   onClose,
 }) => {
+  const { t } = useTranslation();
+
   const { onDeleteData } = useContactList();
 
   const confirmDelete = () => {
@@ -36,18 +39,18 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>Delete Contact List</DialogTitle>
+      <DialogTitle>{t("contact.list.dialog_text_title")}</DialogTitle>
 
       <DialogContent>
-        Do you want to delete {initialValue?.name} ?
+        {t("contact.list.dialog_text_description")} {initialValue?.name} ?
       </DialogContent>
 
       <DialogActions>
-        <Button variant="contained" color="info" onClick={onClose}>
-          Cancel
+        <Button variant="contained" color="inherit" onClick={onClose}>
+          {t("button.cancle")}
         </Button>
         <Button variant="contained" color="primary" onClick={confirmDelete}>
-          Delete
+          {t("button.confirm")}
         </Button>
       </DialogActions>
     </Dialog>

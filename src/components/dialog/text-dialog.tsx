@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 type TTextDialogProps = {
   open: boolean;
@@ -25,28 +26,32 @@ const TextDialog: FC<TTextDialogProps> = ({
   title,
   description,
   onClose,
-}) => (
-  <Dialog open={open} fullWidth maxWidth="xs">
-    <DialogTitle>
-      <Box>
-        <Typography variant="h5">{title}</Typography>
-      </Box>
-    </DialogTitle>
+}) => {
+  const { t } = useTranslation();
 
-    <DialogContent>
-      <Box>
-        <Typography variant="body1" color="textDisabled">
-          {description}
-        </Typography>
-      </Box>
-    </DialogContent>
+  return (
+    <Dialog open={open} fullWidth maxWidth="xs">
+      <DialogTitle>
+        <Box>
+          <Typography variant="h5">{title}</Typography>
+        </Box>
+      </DialogTitle>
 
-    <DialogActions>
-      <Button variant="contained" color="success" onClick={onClose}>
-        Confirm
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+      <DialogContent>
+        <Box>
+          <Typography variant="body1" color="textDisabled">
+            {description}
+          </Typography>
+        </Box>
+      </DialogContent>
+
+      <DialogActions>
+        <Button variant="contained" color="primary" onClick={onClose}>
+          {t("button.close")}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 export default TextDialog;

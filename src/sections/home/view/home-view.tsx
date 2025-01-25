@@ -20,7 +20,9 @@ const HomeView: FC = () => {
   return (
     <>
       <Stack spacing={2}>
-        <Typography variant="h5">{t("welcome")} Chonlatee Sriwichai</Typography>
+        <Typography variant="h5">
+          {t("homepage.welcome")} : Chonlatee Sriwichai
+        </Typography>
 
         <Box
           component="img"

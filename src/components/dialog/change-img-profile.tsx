@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import type { FC } from "react";
 import { useUserProfileContext } from "../../provider/user-profile-img";
+import { useTranslation } from "react-i18next";
 
 type TChangeImgProfileProps = {
   open: boolean;
@@ -20,6 +21,8 @@ type TChangeImgProfileProps = {
 // ---------------------------------------------------------------------------------
 
 const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
+  const { t } = useTranslation();
+
   const {
     getUserProfileImg,
     listImg,
@@ -43,7 +46,7 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={handleOnClose} fullWidth maxWidth="sm">
-      <DialogTitle>Chnage image profile</DialogTitle>
+      <DialogTitle> {t("navbar.dialog_change_img.title")} </DialogTitle>
 
       <DialogContent>
         <Grid container>
@@ -85,11 +88,11 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
       <DialogActions>
         <Stack direction="row" spacing={2}>
           <Button variant="contained" color="inherit" onClick={handleOnClose}>
-            Close
+            {t("button.close")}
           </Button>
 
           <Button variant="contained" color="primary" onClick={handleSaveImg}>
-            Confirm
+            {t("button.confirm")}
           </Button>
         </Stack>
       </DialogActions>
