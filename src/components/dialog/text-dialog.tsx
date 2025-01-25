@@ -7,6 +7,7 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
+
 import type { FC } from "react";
 
 type TTextDialogProps = {
@@ -24,28 +25,28 @@ const TextDialog: FC<TTextDialogProps> = ({
   title,
   description,
   onClose,
-}) => {
-  return (
-    <Dialog open={open} fullWidth maxWidth="xs">
-      <DialogTitle>
-        <Box>
-          <Typography variant="h5">{title}</Typography>
-        </Box>
-      </DialogTitle>
+}) => (
+  <Dialog open={open} fullWidth maxWidth="xs">
+    <DialogTitle>
+      <Box>
+        <Typography variant="h5">{title}</Typography>
+      </Box>
+    </DialogTitle>
 
-      <DialogContent>
-        <Box>
-          <Typography variant="body1" color="textDisabled">{description}</Typography>
-        </Box>
-      </DialogContent>
+    <DialogContent>
+      <Box>
+        <Typography variant="body1" color="textDisabled">
+          {description}
+        </Typography>
+      </Box>
+    </DialogContent>
 
-      <DialogActions>
-        <Button variant="contained" color="success" onClick={onClose}>
-          Confirm
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+    <DialogActions>
+      <Button variant="contained" color="success" onClick={onClose}>
+        Confirm
+      </Button>
+    </DialogActions>
+  </Dialog>
+);
 
 export default TextDialog;

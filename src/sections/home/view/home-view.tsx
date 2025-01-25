@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const HomeView: FC = () => {
 
   return (
     <div>
-      HomeView {t("welcome")}
+      <Typography variant="h5">{t("welcome")}</Typography>
       <Button onClick={goContactPage}>Contact page</Button>
     </div>
   );

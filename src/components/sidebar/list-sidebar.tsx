@@ -5,6 +5,7 @@ import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
 import { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import TextDialog from "../dialog/text-dialog";
 
 const navItems = [
   {
@@ -22,14 +23,36 @@ const navItems = [
         name: "Create",
         to: "/contact/create",
       },
+      {
+        name: "Current location",
+        to: "",
+        function: true,
+      },
     ],
   },
 ];
+
+type TCurrentLocation = {
+  timestamp: number;
+  coords: Coords;
+};
+
+type Coords = {
+  accuracy: number;
+  latitude: number;
+  longitude: number;
+  altitude: unknown;
+  altitudeAccuracy: unknown;
+  heading: unknown;
+  speed: unknown;
+};
 
 // ---------------------------------------------------------------------------------
 
 const ListSidebar: FC = () => {
   const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   // --------------------------- Function ---------------------------
 
@@ -37,30 +60,60 @@ const ListSidebar: FC = () => {
     navigate(path);
   };
 
-  return (
-    <List component="nav">
-      {navItems.map((item) => {
-        if (item.subMenu) {
-          return (
-            <HandleCollapse
-              key={`main-collapse-${item.name}`}
-              name={item.name}
-              data={item.subMenu}
-              handleGoPage={handleGoPage}
-            />
-          );
-        }
+  const currentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, ErrorPermission);
+    }
+  };
 
-        return (
-          <ListItemButton
-            key={`button-${item.name}`}
-            onClick={() => handleGoPage(item.to)}
-          >
-            <ListItemText primary={item.name} />
-          </ListItemButton>
-        );
-      })}
-    </List>
+  const ErrorPermission = () => {
+    setIsOpen(true);
+  };
+
+  function showPosition(position: TCurrentLocation) {
+    const { coords } = position;
+
+    const { latitude, longitude } = coords;
+
+    window.open(`https://www.google.com/maps?q=${latitude},${longitude}`);
+  }
+
+  return (
+    <>
+      <List component="nav">
+        {navItems.map((item) => {
+          if (item.subMenu) {
+            return (
+              <HandleCollapse
+                key={`main-collapse-${item.name}`}
+                name={item.name}
+                data={item.subMenu}
+                handleGoPage={handleGoPage}
+                handleCurrentLocation={currentLocation}
+              />
+            );
+          }
+
+          return (
+            <ListItemButton
+              key={`button-${item.name}`}
+              onClick={() => handleGoPage(item.to)}
+            >
+              <ListItemText primary={item.name} />
+            </ListItemButton>
+          );
+        })}
+      </List>
+
+      {/* DIALOG */}
+
+      <TextDialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Error"
+        description="Your permission denied"
+      />
+    </>
   );
 };
 
@@ -73,12 +126,19 @@ type THandleCollapse = {
   data: Array<{
     name: string;
     to: string;
+    function?: boolean;
   }>;
 
   handleGoPage: (page: string) => void;
+  handleCurrentLocation: () => void;
 };
 
-const HandleCollapse: FC<THandleCollapse> = ({ data, name, handleGoPage }) => {
+const HandleCollapse: FC<THandleCollapse> = ({
+  data,
+  name,
+  handleGoPage,
+  handleCurrentLocation,
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -100,7 +160,9 @@ const HandleCollapse: FC<THandleCollapse> = ({ data, name, handleGoPage }) => {
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4 }}
-              onClick={() => handleGoPage(item.to)}
+              onClick={() =>
+                item.function ? handleCurrentLocation() : handleGoPage(item.to)
+              }
             >
               <ListItemText primary={item.name} />
             </ListItemButton>
