@@ -44,6 +44,7 @@ const ListSidebar: FC = () => {
           return (
             <HandleCollapse
               key={`main-collapse-${item.name}`}
+              name={item.name}
               data={item.subMenu}
               handleGoPage={handleGoPage}
             />
@@ -68,6 +69,7 @@ export default ListSidebar;
 // ---------------------------------------------------------------------------------
 
 type THandleCollapse = {
+  name: string;
   data: Array<{
     name: string;
     to: string;
@@ -76,13 +78,13 @@ type THandleCollapse = {
   handleGoPage: (page: string) => void;
 };
 
-const HandleCollapse: FC<THandleCollapse> = ({ data, handleGoPage }) => {
+const HandleCollapse: FC<THandleCollapse> = ({ data, name, handleGoPage }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <ListItemButton onClick={() => setOpen(!open)}>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
 

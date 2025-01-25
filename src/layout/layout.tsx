@@ -50,11 +50,18 @@ const Layout: FC = () => {
 
   const drawer = (
     <Box>
-      <Box height={64}>
-        <Typography component="div" variant="h6" onClick={goHomePage}>
-          logo
-        </Typography>
-      </Box>
+      <Stack height={64} alignItems="center" justifyContent="center">
+        <Box
+          component="img"
+          src="/logo-rain.svg"
+          width={30}
+          height={30}
+          onClick={goHomePage}
+          sx={{
+            cursor: "pointer",
+          }}
+        />
+      </Stack>
 
       <Divider />
 
