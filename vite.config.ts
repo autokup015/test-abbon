@@ -10,6 +10,19 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./setupTests.ts",
+    coverage: {
+      exclude: [
+        "**/__test__/**",
+        "public",
+        "src/locales",
+        "src/layout",
+        "src/router",
+        "src/main.tsx",
+        "src/App.tsx",
+        "eslint.config.js",
+        "vite.config.ts",
+      ],
+    },
   },
   server: {
     port: 8080,
