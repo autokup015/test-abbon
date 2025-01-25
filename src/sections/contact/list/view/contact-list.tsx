@@ -129,10 +129,16 @@ const ContactList: FC = () => {
           onChange={(e) => setSearch(e.target.value)}
           onKeyUp={handleEnterSearch}
           fullWidth
+          data-testid="input-search"
         />
 
         <Stack direction="row" spacing={2}>
-          <Button variant="outlined" color="primary" onClick={clearSearch}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={clearSearch}
+            data-testid="button-clear"
+          >
             {t("button.clear")}
           </Button>
 
@@ -141,6 +147,7 @@ const ContactList: FC = () => {
             color="primary"
             disabled={disabledBtnSearch}
             onClick={handleSearch}
+            data-testid="button-search"
           >
             {t("button.search")}
           </Button>
@@ -154,6 +161,7 @@ const ContactList: FC = () => {
               sx={{ minWidth: 750 }}
               aria-labelledby="tableTitle"
               size="medium"
+              data-testid="table-contact-list"
             >
               <TableHead>
                 <TableRow>

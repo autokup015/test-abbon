@@ -46,7 +46,7 @@ const TextDialog: FC<TTextDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button variant="contained" color="primary" onClick={onClose}>
+        <Button variant="contained" color="primary" onClick={onClose} data-testid="button-close">
           {t("button.close")}
         </Button>
       </DialogActions>

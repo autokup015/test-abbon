@@ -98,6 +98,8 @@ const CreateList: FC = () => {
                     variant="outlined"
                     error={!!errors.name}
                     helperText={errors ? errors?.name?.message : ""}
+                    
+                    data-testid="input-name"
                   />
                 </Grid>
 
@@ -110,12 +112,18 @@ const CreateList: FC = () => {
                     value={getValueAge === 0 ? "" : getValueAge}
                     error={!!errors.age}
                     helperText={errors ? errors?.age?.message : ""}
+                    data-testid="input-age"
                   />
                 </Grid>
 
                 <Grid item xs={12}>
                   <Box textAlign="end">
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      data-testid="button-submit-data"
+                    >
                       {t("button.create")}
                     </Button>
                   </Box>

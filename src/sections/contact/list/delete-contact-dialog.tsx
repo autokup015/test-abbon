@@ -46,10 +46,20 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button variant="contained" color="inherit" onClick={onClose}>
-          {t("button.cancle")}
+        <Button
+          variant="contained"
+          color="inherit"
+          onClick={onClose}
+          data-testid="button-cancel"
+        >
+          {t("button.cancel")}
         </Button>
-        <Button variant="contained" color="primary" onClick={confirmDelete}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={confirmDelete}
+          data-testid="button-confirm"
+        >
           {t("button.confirm")}
         </Button>
       </DialogActions>

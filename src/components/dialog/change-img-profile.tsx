@@ -87,7 +87,12 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
 
       <DialogActions>
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" color="inherit" onClick={handleOnClose}>
+          <Button
+            variant="contained"
+            color="inherit"
+            onClick={handleOnClose}
+            data-testid="button-close"
+          >
             {t("button.close")}
           </Button>
 
