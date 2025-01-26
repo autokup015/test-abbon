@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import DeleteContactDialog from '../delete-contact-dialog';
 import { afterEach, vi } from 'vitest';
 import { TCreateList } from '../../create/schema/create-schema';
+import { I18nProvider } from '@/locales';
 
 describe('<DeleteContactDialog />', () => {
   const setup = () => {
@@ -15,11 +16,13 @@ describe('<DeleteContactDialog />', () => {
     };
 
     const agrs = render(
-      <DeleteContactDialog
-        open
-        onClose={mockOnClose}
-        initialValue={mockInitialValue}
-      />,
+      <I18nProvider>
+        <DeleteContactDialog
+          open
+          onClose={mockOnClose}
+          initialValue={mockInitialValue}
+        />
+      </I18nProvider>
     );
 
     return {
@@ -39,10 +42,10 @@ describe('<DeleteContactDialog />', () => {
     const getBtnCancel = screen.getByTestId('button-cancel');
     const getBtnConfirm = screen.getByTestId('button-confirm');
 
+    expect(screen.getByText('ลบรายการติดต่อ')).toBeInTheDocument();
+
     expect(
-      screen.getByText(
-        `contact.list.dialog_text_description ${mockInitialValue.name} ?`,
-      ),
+      screen.getByText(`คุณต้องการลบ ${mockInitialValue.name} ?`)
     ).toBeInTheDocument();
 
     expect(getBtnCancel).toBeInTheDocument();

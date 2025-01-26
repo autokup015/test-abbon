@@ -2,13 +2,16 @@ import { render, screen } from '@testing-library/react';
 import ContactList from '../contact-list';
 import { MemoryRouter } from 'react-router-dom';
 import DeleteContactDialog from '../__mock__/delete-contact-dialog';
+import { I18nProvider } from '@/locales';
 
 describe('<ContactList />', () => {
   it('should render component contact list', () => {
     render(
-      <MemoryRouter>
-        <ContactList />
-      </MemoryRouter>,
+      <I18nProvider>
+        <MemoryRouter>
+          <ContactList />
+        </MemoryRouter>
+      </I18nProvider>
     );
 
     const getInput = screen.getByTestId('input-search');

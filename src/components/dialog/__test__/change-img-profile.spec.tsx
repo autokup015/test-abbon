@@ -3,15 +3,18 @@ import ChangeImgProfile from '../change-img-profile';
 import { vi } from 'vitest';
 import { UserProfileImgProvider } from '../../../provider/user-profile-img';
 import { IMG_PATH } from '../../../constant/img-user';
+import { I18nProvider } from '@/locales';
 
 describe('<ChangeImgProfile />', () => {
   const setup = () => {
     const mockOnclose = vi.fn();
 
     const agrs = render(
-      <UserProfileImgProvider>
-        <ChangeImgProfile open onClose={mockOnclose} />
-      </UserProfileImgProvider>,
+      <I18nProvider>
+        <UserProfileImgProvider>
+          <ChangeImgProfile open onClose={mockOnclose} />
+        </UserProfileImgProvider>
+      </I18nProvider>
     );
 
     return {

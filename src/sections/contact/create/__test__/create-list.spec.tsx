@@ -5,6 +5,7 @@ import TextDialog from '../__mock__/text-dialog';
 import { TCreateList } from '../schema/create-schema';
 import { ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { I18nProvider } from '@/locales';
 
 describe('<CreateList />', () => {
   const mockDefaultValues: TCreateList = {
@@ -23,10 +24,12 @@ describe('<CreateList />', () => {
   const setup = () => {
     const args = render(
       <MemoryRouter>
-        <Wrapper>
-          <CreateList />
-        </Wrapper>
-      </MemoryRouter>,
+        <I18nProvider>
+          <Wrapper>
+            <CreateList />
+          </Wrapper>
+        </I18nProvider>
+      </MemoryRouter>
     );
 
     return {
@@ -61,11 +64,11 @@ describe('<CreateList />', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText('String must contain at least 1 character(s)'),
+        screen.getByText('String must contain at least 1 character(s)')
       ).toBeInTheDocument();
 
       expect(
-        screen.getByText('Number must be greater than or equal to 1'),
+        screen.getByText('Number must be greater than or equal to 1')
       ).toBeInTheDocument();
     });
   });

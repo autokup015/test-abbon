@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import TextDialog from '../text-dialog';
 
 import { vi } from 'vitest';
+import { I18nProvider } from '@/locales';
 
 describe('<TextDialog />', () => {
   const setup = () => {
@@ -13,12 +14,14 @@ describe('<TextDialog />', () => {
     };
 
     const args = render(
-      <TextDialog
-        open
-        onClose={mockOnClose}
-        title={mockData.title}
-        description={mockData.description}
-      />,
+      <I18nProvider>
+        <TextDialog
+          open
+          onClose={mockOnClose}
+          title={mockData.title}
+          description={mockData.description}
+        />
+      </I18nProvider>
     );
 
     return { ...args, mockData, mockOnClose };

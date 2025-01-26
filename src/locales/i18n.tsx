@@ -39,10 +39,17 @@ const resources = {
   },
 };
 
-i18next.use(LanguageDetector).use(initReactI18next).init({
-  resources,
-  lng,
-});
+i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng,
+    fallbackLng: 'th',
+    interpolation: {
+      escapeValue: false,
+    },
+  });
 
 // ----------------------------------------------------------------------
 
