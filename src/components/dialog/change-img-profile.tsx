@@ -8,10 +8,10 @@ import {
   Grid,
   Stack,
   Typography,
-} from "@mui/material";
-import type { FC } from "react";
-import { useUserProfileContext } from "../../provider/user-profile-img";
-import { useTranslation } from "react-i18next";
+} from '@mui/material';
+import type { FC } from 'react';
+import { useUserProfileContext } from '../../provider/user-profile-img';
+import { useTranslation } from 'react-i18next';
 
 type TChangeImgProfileProps = {
   open: boolean;
@@ -46,7 +46,7 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={handleOnClose} fullWidth maxWidth="sm">
-      <DialogTitle> {t("navbar.dialog_change_img.title")} </DialogTitle>
+      <DialogTitle> {t('navbar.dialog_change_img.title')} </DialogTitle>
 
       <DialogContent>
         <Grid container>
@@ -55,7 +55,7 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
               component="img"
               src={selectedImg?.path || getUserProfileImg}
               width={200}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: 'pointer' }}
             />
           </Grid>
 
@@ -70,7 +70,7 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
                       component="img"
                       src={item.path}
                       width={100}
-                      sx={{ cursor: "pointer" }}
+                      sx={{ cursor: 'pointer' }}
                       onClick={() => onSelected(item)}
                     />
 
@@ -93,11 +93,11 @@ const ChangeImgProfile: FC<TChangeImgProfileProps> = ({ open, onClose }) => {
             onClick={handleOnClose}
             data-testid="button-close"
           >
-            {t("button.close")}
+            {t('button.close')}
           </Button>
 
           <Button variant="contained" color="primary" onClick={handleSaveImg}>
-            {t("button.confirm")}
+            {t('button.confirm')}
           </Button>
         </Stack>
       </DialogActions>

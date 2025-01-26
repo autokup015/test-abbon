@@ -1,16 +1,16 @@
-import { render, waitFor } from "@testing-library/react";
-import Homepage from "../page";
-import { RenderWithProvider } from "../../../utils/provider-test";
+import { render, waitFor } from '@testing-library/react';
+import Homepage from '../page';
+import { RenderWithProvider } from '../../../utils/provider-test';
 
-describe("<Homepage />", () => {
-  it("should render homepage", async () => {
+describe('<Homepage />', () => {
+  it('should render homepage', async () => {
     const { unmount } = render(
       <RenderWithProvider>
         <Homepage />
-      </RenderWithProvider>
+      </RenderWithProvider>,
     );
 
-    await waitFor(() => expect(document.title).toEqual("Homepage"));
+    await waitFor(() => expect(document.title).toEqual('Homepage'));
 
     unmount();
   });

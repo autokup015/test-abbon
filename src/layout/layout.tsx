@@ -1,24 +1,24 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack } from '@mui/material';
 
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from 'react-router-dom';
 
-import AppBar from "@mui/material/AppBar";
+import AppBar from '@mui/material/AppBar';
 
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import { useState } from "react";
-import ChangeLanguages from "../components/header/change-languages";
-import UserImgProfile from "../components/header/user-img-profile";
-import Footer from "../components/footer/footer";
-import ListSidebar from "../components/sidebar/list-sidebar";
+import { useState } from 'react';
+import ChangeLanguages from '../components/header/change-languages';
+import UserImgProfile from '../components/header/user-img-profile';
+import Footer from '../components/footer/footer';
+import ListSidebar from '../components/sidebar/list-sidebar';
 
 const drawerWidth = 240;
 
@@ -46,7 +46,7 @@ const Layout: FC = () => {
     }
   };
 
-  const goHomePage = () => navigate("/");
+  const goHomePage = () => navigate('/');
 
   const drawer = (
     <Box>
@@ -58,7 +58,7 @@ const Layout: FC = () => {
           height={30}
           onClick={goHomePage}
           sx={{
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
         />
       </Stack>
@@ -70,7 +70,7 @@ const Layout: FC = () => {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -85,7 +85,7 @@ const Layout: FC = () => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
@@ -106,7 +106,7 @@ const Layout: FC = () => {
               <Divider
                 orientation="vertical"
                 flexItem
-                sx={{ mx: 2, bgcolor: "white" }}
+                sx={{ mx: 2, bgcolor: 'white' }}
               />
 
               <UserImgProfile />
@@ -130,9 +130,9 @@ const Layout: FC = () => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
               width: drawerWidth,
             },
           }}
@@ -143,9 +143,9 @@ const Layout: FC = () => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
               width: drawerWidth,
             },
           }}

@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
 import {
   CircularProgress,
@@ -6,34 +6,34 @@ import {
   List,
   ListItemButton,
   ListItemText,
-} from "@mui/material";
+} from '@mui/material';
 
-import { useState } from "react";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import TextDialog from "../dialog/text-dialog";
-import { TFunction } from "i18next";
-import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import TextDialog from '../dialog/text-dialog';
+import { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const navItems = (t: TFunction) => [
   {
-    name: t("menu.home"),
-    to: "/",
+    name: t('menu.home'),
+    to: '/',
   },
   {
-    name: t("menu.contact"),
+    name: t('menu.contact'),
     subMenu: [
       {
-        name: t("menu.sub_contact_list"),
-        to: "/contact/list",
+        name: t('menu.sub_contact_list'),
+        to: '/contact/list',
       },
       {
-        name: t("menu.sub_contact_create"),
-        to: "/contact/create",
+        name: t('menu.sub_contact_create'),
+        to: '/contact/create',
       },
       {
-        name: t("menu.sub_contact_location"),
-        to: "",
+        name: t('menu.sub_contact_location'),
+        to: '',
         function: true,
       },
     ],
@@ -130,8 +130,8 @@ const ListSidebar: FC = () => {
           setIsOpen(false);
           setIsLoading(false);
         }}
-        title={t("menu.dialog_location.title")}
-        description={t("menu.dialog_location.description")}
+        title={t('menu.dialog_location.title')}
+        description={t('menu.dialog_location.description')}
       />
     </>
   );

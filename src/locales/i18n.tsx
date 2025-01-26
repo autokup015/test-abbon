@@ -1,22 +1,22 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from 'react';
 
-import i18next from "i18next";
+import i18next from 'i18next';
 
-import { initReactI18next, I18nextProvider as Provider } from "react-i18next";
+import { initReactI18next, I18nextProvider as Provider } from 'react-i18next';
 
-import LanguageDetector from "i18next-browser-languagedetector";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-import En from "./en.json";
+import En from './en.json';
 
-import Th from "./th.json";
+import Th from './th.json';
 
 // ---------------------------------------------------------------------------------
 
-import type Thai from "./th.json";
+import type Thai from './th.json';
 
-declare module "i18next" {
+declare module 'i18next' {
   interface CustomTypeOptions {
-    defaultNS: "default";
+    defaultNS: 'default';
 
     // custom resources type
 
@@ -28,7 +28,7 @@ declare module "i18next" {
 
 // ----------------------------------------------------------------------
 
-const lng = localStorage.getItem("i18nextLng") ?? "th";
+const lng = localStorage.getItem('i18nextLng') ?? 'th';
 
 const resources = {
   en: {

@@ -1,17 +1,17 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import ChangeImgProfile from "../change-img-profile";
-import { vi } from "vitest";
-import { UserProfileImgProvider } from "../../../provider/user-profile-img";
-import { IMG_PATH } from "../../../constant/img-user";
+import { fireEvent, render, screen } from '@testing-library/react';
+import ChangeImgProfile from '../change-img-profile';
+import { vi } from 'vitest';
+import { UserProfileImgProvider } from '../../../provider/user-profile-img';
+import { IMG_PATH } from '../../../constant/img-user';
 
-describe("<ChangeImgProfile />", () => {
+describe('<ChangeImgProfile />', () => {
   const setup = () => {
     const mockOnclose = vi.fn();
 
     const agrs = render(
       <UserProfileImgProvider>
         <ChangeImgProfile open onClose={mockOnclose} />
-      </UserProfileImgProvider>
+      </UserProfileImgProvider>,
     );
 
     return {
@@ -24,7 +24,7 @@ describe("<ChangeImgProfile />", () => {
     vi.resetAllMocks();
   });
 
-  it("should render dialog ChangeImgProfile", () => {
+  it('should render dialog ChangeImgProfile', () => {
     setup();
 
     const arrImgPath = Object.entries(IMG_PATH)
@@ -36,10 +36,10 @@ describe("<ChangeImgProfile />", () => {
     });
   });
 
-  it("should call onClose function", () => {
+  it('should call onClose function', () => {
     const { mockOnclose } = setup();
 
-    fireEvent.click(screen.getByTestId("button-close"));
+    fireEvent.click(screen.getByTestId('button-close'));
 
     expect(mockOnclose).toHaveBeenCalledTimes(1);
   });

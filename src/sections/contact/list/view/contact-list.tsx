@@ -1,4 +1,4 @@
-import { KeyboardEvent, useMemo, useState, type FC } from "react";
+import { KeyboardEvent, useMemo, useState, type FC } from 'react';
 
 import {
   Box,
@@ -15,18 +15,18 @@ import {
   TableRow,
   TextField,
   Typography,
-} from "@mui/material";
-import { useContactList } from "../../../../hook/use-contact-list";
-import DeleteContactDialog from "../delete-contact-dialog";
-import { TCreateList } from "../../create/schema/create-schema";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { TFunction } from "i18next";
+} from '@mui/material';
+import { useContactList } from '../../../../hook/use-contact-list';
+import DeleteContactDialog from '../delete-contact-dialog';
+import { TCreateList } from '../../create/schema/create-schema';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 const TABLE_HEAD = (t: TFunction) => [
-  { id: "fullName", label: t("contact.list.table_title_fullname") },
-  { id: "age", label: t("contact.list.table_title_age") },
-  { id: "", label: "", width: 10 },
+  { id: 'fullName', label: t('contact.list.table_title_fullname') },
+  { id: 'age', label: t('contact.list.table_title_age') },
+  { id: '', label: '', width: 10 },
 ];
 
 // ---------------------------------------------------------------------------------
@@ -44,9 +44,9 @@ const ContactList: FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
-  const [confirmSearch, setConfirmSearch] = useState("");
+  const [confirmSearch, setConfirmSearch] = useState('');
 
   // --------------------------- Value ---------------------------
 
@@ -55,9 +55,9 @@ const ContactList: FC = () => {
   const filterSearchDataContact = useMemo(
     () =>
       [...dataContactList].filter((item) =>
-        item.name.toLowerCase().match(confirmSearch.toLowerCase())
+        item.name.toLowerCase().match(confirmSearch.toLowerCase()),
       ),
-    [confirmSearch, dataContactList]
+    [confirmSearch, dataContactList],
   );
 
   const emptyRows =
@@ -69,9 +69,9 @@ const ContactList: FC = () => {
     () =>
       filterSearchDataContact.slice(
         page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
+        page * rowsPerPage + rowsPerPage,
       ),
-    [filterSearchDataContact, page, rowsPerPage]
+    [filterSearchDataContact, page, rowsPerPage],
   );
 
   // --------------------------- Function ---------------------------
@@ -87,7 +87,7 @@ const ContactList: FC = () => {
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -113,17 +113,17 @@ const ContactList: FC = () => {
   };
 
   const clearSearch = () => {
-    setSearch("");
-    setConfirmSearch("");
+    setSearch('');
+    setConfirmSearch('');
   };
 
   return (
     <Stack spacing={2}>
-      <Typography variant="h6">{t("contact.list.title")}</Typography>
+      <Typography variant="h6">{t('contact.list.title')}</Typography>
 
       <Stack direction="row" justifyContent="space-between" spacing={2}>
         <TextField
-          label={t("contact.list.input_search")}
+          label={t('contact.list.input_search')}
           size="small"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -139,7 +139,7 @@ const ContactList: FC = () => {
             onClick={clearSearch}
             data-testid="button-clear"
           >
-            {t("button.clear")}
+            {t('button.clear')}
           </Button>
 
           <Button
@@ -149,13 +149,13 @@ const ContactList: FC = () => {
             onClick={handleSearch}
             data-testid="button-search"
           >
-            {t("button.search")}
+            {t('button.search')}
           </Button>
         </Stack>
       </Stack>
 
-      <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2 }}>
+      <Box sx={{ width: '100%' }}>
+        <Paper sx={{ width: '100%', mb: 2 }}>
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 750 }}
@@ -179,7 +179,7 @@ const ContactList: FC = () => {
                     key={`name-${item.name}-${item.age}`}
                     hover
                     tabIndex={-1}
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: 'pointer' }}
                   >
                     <TableCell>{item.name}</TableCell>
 
@@ -265,23 +265,23 @@ const TableEmptry: FC<TEmptyRows> = ({ nodata, initialValue }) => {
           colSpan={3}
           sx={{
             p: 15,
-            textAlign: "center",
-            border: "none",
+            textAlign: 'center',
+            border: 'none',
           }}
         >
           <Stack alignItems="center" spacing={2}>
             <Typography variant="h4" color="textDisabled">
-              {t("contact.list.table_emptry_title")}
+              {t('contact.list.table_emptry_title')}
             </Typography>
 
             {initialValue && (
               <Button
                 variant="text"
                 color="primary"
-                sx={{ width: "max-content", m: "auto" }}
-                onClick={() => nagigate("/contact/create")}
+                sx={{ width: 'max-content', m: 'auto' }}
+                onClick={() => nagigate('/contact/create')}
               >
-                {t("contact.list.table_emptry_button")}
+                {t('contact.list.table_emptry_button')}
               </Button>
             )}
           </Stack>

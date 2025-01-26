@@ -1,8 +1,8 @@
-import NotFound from "../pages/404/not-found";
+import NotFound from '../pages/404/not-found';
 
 const NotFoundPage = [
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
 ];

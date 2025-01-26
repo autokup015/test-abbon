@@ -1,8 +1,8 @@
-import { DATA_CONTACT_LIST } from "../constant/data-localstroage";
-import { TCreateList } from "../sections/contact/create/schema/create-schema";
+import { DATA_CONTACT_LIST } from '../constant/data-localstroage';
+import { TCreateList } from '../sections/contact/create/schema/create-schema';
 
 const useContactList = () => {
-  const getContact = localStorage.getItem(DATA_CONTACT_LIST) || "";
+  const getContact = localStorage.getItem(DATA_CONTACT_LIST) || '';
 
   const fianlContactData: TCreateList[] = getContact.length
     ? JSON.parse(getContact)

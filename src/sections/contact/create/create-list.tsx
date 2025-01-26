@@ -1,6 +1,6 @@
-import { useState, type ChangeEvent, type FC } from "react";
+import { useState, type ChangeEvent, type FC } from 'react';
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Box,
@@ -10,15 +10,16 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
-import { useForm } from "react-hook-form";
-import { CreateListSchema, TCreateList } from "./schema/create-schema";
-import { useContactList } from "../../../hook/use-contact-list";
-import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import TextDialog from "../../../components/dialog/text-dialog";
-import { useTranslation } from "react-i18next";
+import { useForm } from 'react-hook-form';
+import { CreateListSchema, TCreateList } from './schema/create-schema';
+import { useContactList } from '../../../hook/use-contact-list';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+
+import { useTranslation } from 'react-i18next';
+import TextDialog from '@/components/dialog/text-dialog';
 
 const REGEX_NUMBER = /$^|^[0-9]+$/;
 
@@ -36,8 +37,8 @@ const CreateList: FC = () => {
   // --------------------------- Schema ---------------------------
 
   const defaultValues = {
-    id: "",
-    name: "",
+    id: '',
+    name: '',
     age: 0,
   };
 
@@ -63,7 +64,7 @@ const CreateList: FC = () => {
   };
 
   // ! may be not use this because validate is can prove it
-  const onError = () => console.log("errors", errors);
+  const onError = () => console.log('errors', errors);
 
   const onChangeAge = (e: ChangeEvent<HTMLInputElement>) => {
     const getValue = e.target.value;
@@ -72,19 +73,19 @@ const CreateList: FC = () => {
       return;
     }
 
-    const finalValue = getValue === "" ? 0 : Number(getValue);
+    const finalValue = getValue === '' ? 0 : Number(getValue);
 
-    setValue("age", finalValue, { shouldValidate: true });
+    setValue('age', finalValue, { shouldValidate: true });
   };
 
   // --------------------------- Value ---------------------------
 
-  const getValueAge = watch("age");
+  const getValueAge = watch('age');
 
   return (
     <>
       <Stack spacing={2}>
-        <Typography variant="h6">{t("contact.create.title")}</Typography>
+        <Typography variant="h6">{t('contact.create.title')}</Typography>
 
         <Card sx={{ p: 2 }}>
           <Stack direction="column" spacing={2}>
@@ -92,13 +93,12 @@ const CreateList: FC = () => {
               <Grid container spacing={2}>
                 <Grid item md={6} sm={12} xs={12}>
                   <TextField
-                    {...register("name")}
+                    {...register('name')}
                     fullWidth
-                    label={t("contact.create.input_label_fullname")}
+                    label={t('contact.create.input_label_fullname')}
                     variant="outlined"
                     error={!!errors.name}
-                    helperText={errors ? errors?.name?.message : ""}
-                    
+                    helperText={errors ? errors?.name?.message : ''}
                     data-testid="input-name"
                   />
                 </Grid>
@@ -107,11 +107,11 @@ const CreateList: FC = () => {
                   <TextField
                     onChange={onChangeAge}
                     fullWidth
-                    label={t("contact.create.input_label_age")}
+                    label={t('contact.create.input_label_age')}
                     variant="outlined"
-                    value={getValueAge === 0 ? "" : getValueAge}
+                    value={getValueAge === 0 ? '' : getValueAge}
                     error={!!errors.age}
-                    helperText={errors ? errors?.age?.message : ""}
+                    helperText={errors ? errors?.age?.message : ''}
                     data-testid="input-age"
                   />
                 </Grid>
@@ -124,7 +124,7 @@ const CreateList: FC = () => {
                       type="submit"
                       data-testid="button-submit-data"
                     >
-                      {t("button.create")}
+                      {t('button.create')}
                     </Button>
                   </Box>
                 </Grid>
@@ -141,10 +141,10 @@ const CreateList: FC = () => {
         onClose={() => {
           setIsOpen(false);
 
-          navigate("/contact/list");
+          navigate('/contact/list');
         }}
-        title={t("contact.create.dialog_create_title")}
-        description={t("contact.create.dialog_create_description")}
+        title={t('contact.create.dialog_create_title')}
+        description={t('contact.create.dialog_create_description')}
       />
     </>
   );

@@ -1,30 +1,30 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
-import Layout from "../layout/layout";
+import Layout from '../layout/layout';
 
 // --------------------------- Page ---------------------------
 
-import HomePage from "../pages/home/page";
-import CreateContactPage from "../pages/contact/create/page";
-import ListContactPage from "../pages/contact/list/page";
+import HomePage from '../pages/home/page';
+import CreateContactPage from '../pages/contact/create/page';
+import ListContactPage from '../pages/contact/list/page';
 
-import { NotFoundPage } from "./notfound";
+import { NotFoundPage } from './notfound';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <HomePage />,
       },
       {
-        path: "/contact/list",
+        path: '/contact/list',
         element: <ListContactPage />,
       },
       {
-        path: "/contact/create",
+        path: '/contact/create',
         element: <CreateContactPage />,
       },
     ],

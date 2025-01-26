@@ -1,8 +1,8 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import CreateList from "../../../sections/contact/create/create-list";
+import CreateList from '../../../sections/contact/create/create-list';
 
-const metadata = { title: `Contact Create` };
+const metadata = { title: 'Contact Create' };
 
 // ---------------------------------------------------------------------------------
 

@@ -1,10 +1,10 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from 'react';
 
-import { createContext, useContext } from "react";
-import { DATA_IMG_USER } from "../constant/data-localstroage";
-import { IMG_PATH } from "../constant/img-user";
+import { createContext, useContext } from 'react';
+import { DATA_IMG_USER } from '../constant/data-localstroage';
+import { IMG_PATH } from '../constant/img-user';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 type TImg = {
   name: string;
@@ -77,7 +77,7 @@ const useUserProfileContext = () => {
   const context = useContext(CreateUserProfileImgContext);
 
   if (!context) {
-    throw new Error("useUserProfileContext must be in provider");
+    throw new Error('useUserProfileContext must be in provider');
   }
 
   return context;

@@ -1,20 +1,20 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import { Box, Stack } from "@mui/material";
+import { Box, Stack } from '@mui/material';
 
 const Footer: FC = () => {
   const sizeIcon = 25;
 
   const onCallPhone = () => {
-    window.location.href = "tel:+1234567890";
+    window.location.href = 'tel:+1234567890';
   };
 
   const onSendEmail = () => {
-    window.location.href = "mailto:atbochonlatee@gmail.com";
+    window.location.href = 'mailto:atbochonlatee@gmail.com';
   };
 
   const onShowLine = () => {
-    window.location.href = "https://line.me/ti/p/~autochonlatee";
+    window.location.href = 'https://line.me/ti/p/~autochonlatee';
   };
 
   return (
@@ -25,7 +25,7 @@ const Footer: FC = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        borderTop: "1px solid #eee",
+        borderTop: '1px solid #eee',
       }}
     >
       <Stack direction="row" spacing={2}>
@@ -35,7 +35,7 @@ const Footer: FC = () => {
           width={sizeIcon}
           height={sizeIcon}
           sx={{
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
           onClick={onCallPhone}
         />
@@ -46,7 +46,7 @@ const Footer: FC = () => {
           width={sizeIcon}
           height={sizeIcon}
           sx={{
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
           onClick={onSendEmail}
         />
@@ -57,7 +57,7 @@ const Footer: FC = () => {
           width={sizeIcon}
           height={sizeIcon}
           sx={{
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
           onClick={onShowLine}
         />

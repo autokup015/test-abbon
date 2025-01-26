@@ -6,10 +6,10 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
-import type { FC } from "react";
-import { useTranslation } from "react-i18next";
+import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type TTextDialogProps = {
   open: boolean;
@@ -46,8 +46,13 @@ const TextDialog: FC<TTextDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button variant="contained" color="primary" onClick={onClose} data-testid="button-close">
-          {t("button.close")}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onClose}
+          data-testid="button-close"
+        >
+          {t('button.close')}
         </Button>
       </DialogActions>
     </Dialog>

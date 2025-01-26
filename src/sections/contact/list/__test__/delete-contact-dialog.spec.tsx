@@ -1,16 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import DeleteContactDialog from "../delete-contact-dialog";
-import { afterEach, vi } from "vitest";
-import { TCreateList } from "../../create/schema/create-schema";
+import DeleteContactDialog from '../delete-contact-dialog';
+import { afterEach, vi } from 'vitest';
+import { TCreateList } from '../../create/schema/create-schema';
 
-describe("<DeleteContactDialog />", () => {
+describe('<DeleteContactDialog />', () => {
   const setup = () => {
     const mockOnClose = vi.fn();
 
     const mockInitialValue: TCreateList = {
-      id: "1150",
-      name: "Auto",
+      id: '1150',
+      name: 'Auto',
       age: 20,
     };
 
@@ -19,7 +19,7 @@ describe("<DeleteContactDialog />", () => {
         open
         onClose={mockOnClose}
         initialValue={mockInitialValue}
-      />
+      />,
     );
 
     return {
@@ -33,16 +33,16 @@ describe("<DeleteContactDialog />", () => {
     vi.resetAllMocks();
   });
 
-  it("should render delete contact dialog", () => {
+  it('should render delete contact dialog', () => {
     const { mockInitialValue } = setup();
 
-    const getBtnCancel = screen.getByTestId("button-cancel");
-    const getBtnConfirm = screen.getByTestId("button-confirm");
+    const getBtnCancel = screen.getByTestId('button-cancel');
+    const getBtnConfirm = screen.getByTestId('button-confirm');
 
     expect(
       screen.getByText(
-        `contact.list.dialog_text_description ${mockInitialValue.name} ?`
-      )
+        `contact.list.dialog_text_description ${mockInitialValue.name} ?`,
+      ),
     ).toBeInTheDocument();
 
     expect(getBtnCancel).toBeInTheDocument();
@@ -50,10 +50,10 @@ describe("<DeleteContactDialog />", () => {
     expect(getBtnConfirm).toBeInTheDocument();
   });
 
-  it("should close dialog", () => {
+  it('should close dialog', () => {
     const { mockOnClose } = setup();
 
-    const getBtnCancel = screen.getByTestId("button-cancel");
+    const getBtnCancel = screen.getByTestId('button-cancel');
 
     fireEvent.click(getBtnCancel);
 

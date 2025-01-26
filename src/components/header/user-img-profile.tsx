@@ -1,9 +1,9 @@
-import { useState, type FC } from "react";
+import { useState, type FC } from 'react';
 
-import { Avatar } from "@mui/material";
+import { Avatar } from '@mui/material';
 
-import ChangeImgProfile from "../dialog/change-img-profile";
-import { useUserProfileContext } from "../../provider/user-profile-img";
+import ChangeImgProfile from '../dialog/change-img-profile';
+import { useUserProfileContext } from '../../provider/user-profile-img';
 
 // ---------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ const UserImgProfile: FC = () => {
     <>
       <Avatar
         src={getUserProfileImg}
-        sx={{ width: 33, height: 33, cursor: "pointer" }}
+        sx={{ width: 33, height: 33, cursor: 'pointer' }}
         onClick={() => setIsOpen(true)}
       />
 

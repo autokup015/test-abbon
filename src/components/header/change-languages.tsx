@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
 import {
   Box,
@@ -9,21 +9,21 @@ import {
   ListItemIcon,
   ListItemText,
   Popover,
-} from "@mui/material";
+} from '@mui/material';
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const lang = [
   {
-    name: "ภาษาไทย",
-    img: "/img/th.svg",
-    lang: "th",
+    name: 'ภาษาไทย',
+    img: '/img/th.svg',
+    lang: 'th',
   },
   {
-    name: "English",
-    img: "/img/en.svg",
-    lang: "en",
+    name: 'English',
+    img: '/img/en.svg',
+    lang: 'en',
   },
 ];
 
@@ -62,7 +62,7 @@ const ChangeLanguages: FC = () => {
 
   const open = Boolean(anchorEl);
 
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   const getImgFlag = `/img/${language}.svg`;
 
@@ -75,7 +75,7 @@ const ChangeLanguages: FC = () => {
           width={33}
           height={33}
           sx={{
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
         />
       </Button>
@@ -86,12 +86,12 @@ const ChangeLanguages: FC = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
       >
         <List>

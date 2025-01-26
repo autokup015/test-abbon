@@ -1,5 +1,5 @@
-import type { FC } from "react";
-import type { TCreateList } from "../create/schema/create-schema";
+import type { FC } from 'react';
+import type { TCreateList } from '../create/schema/create-schema';
 
 import {
   Button,
@@ -7,9 +7,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-} from "@mui/material";
-import { useContactList } from "../../../hook/use-contact-list";
-import { useTranslation } from "react-i18next";
+} from '@mui/material';
+import { useContactList } from '../../../hook/use-contact-list';
+import { useTranslation } from 'react-i18next';
 
 type TDeleteContactDialogProps = {
   open: boolean;
@@ -39,10 +39,10 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>{t("contact.list.dialog_text_title")}</DialogTitle>
+      <DialogTitle>{t('contact.list.dialog_text_title')}</DialogTitle>
 
       <DialogContent>
-        {t("contact.list.dialog_text_description")} {initialValue?.name} ?
+        {t('contact.list.dialog_text_description')} {initialValue?.name} ?
       </DialogContent>
 
       <DialogActions>
@@ -52,7 +52,7 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
           onClick={onClose}
           data-testid="button-cancel"
         >
-          {t("button.cancel")}
+          {t('button.cancel')}
         </Button>
         <Button
           variant="contained"
@@ -60,7 +60,7 @@ const DeleteContactDialog: FC<TDeleteContactDialogProps> = ({
           onClick={confirmDelete}
           data-testid="button-confirm"
         >
-          {t("button.confirm")}
+          {t('button.confirm')}
         </Button>
       </DialogActions>
     </Dialog>

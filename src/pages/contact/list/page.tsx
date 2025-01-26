@@ -1,8 +1,8 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import ContactList from "../../../sections/contact/list/view/contact-list";
+import ContactList from '../../../sections/contact/list/view/contact-list';
 
-const metadata = { title: `Contact List` };
+const metadata = { title: 'Contact List' };
 
 // ---------------------------------------------------------------------------------
 

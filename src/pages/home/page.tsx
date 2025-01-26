@@ -1,7 +1,7 @@
-import type { FC } from "react";
-import HomeView from "../../sections/home/view/home-view";
+import type { FC } from 'react';
+import HomeView from '../../sections/home/view/home-view';
 
-const metadata = { title: `Homepage` };
+const metadata = { title: 'Homepage' };
 
 // ---------------------------------------------------------------------------------
 
